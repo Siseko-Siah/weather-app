@@ -1,44 +1,48 @@
-import { useState } from 'react';
-import { fetchWeather } from '../api/weatherApi';
+import { useState, useEffect, useCallback } from 'react';
+import { getCurrentLocation, fetchWeatherData } from '../api/weatherApi';
 
+/**
+ * Custom hook to manage weather data and geolocation
+ * @returns {Object} Weather state and control functions
+ */
 export const useWeather = () => {
-    const [weatherData, setWeatherData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+  const [weatherData, setWeatherData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    // This function refreshes the current weather data for given coordinates
-    const getWeather = () => {
-        setLoading(true);
-        setError("");
-        setWeatherData(null);
+  const loadWeather = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-        if (!navigator.geolocation) {
-            setError("Geolocation is not supported by your browser.");
-            setLoading(false);
-            return;
-        }
+      // Get user location
+      const location = await getCurrentLocation();
 
-        navigator.geolocation.getCurrentPosition(
-            async (position) => {
-                const { latitude, logitude} = position.coords;
+      // Fetch weather data
+      const weather = await fetchWeatherData(location.latitude, location.longitude);
+      
+      setWeatherData(weather);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-                try {
-                    const data = await fetchWeather(latitude, logitude);
-                    setWeatherData(data);
-                } catch (error) {
-                    setError("Failed to fetch weather data.");
-                } finally {
-                    setLoading(false);
-                }
-            },
-            (error) => {
-                setError("Unable to retrieve your location. Please allow location access.");
-                setLoading(false);
-            }
-        )
-    };
+  // Load weather on mount
+  useEffect(() => {
+    loadWeather();
+  }, [loadWeather]);
 
-    return { weatherData, loading, error, getWeather };
+  // Refresh function
+  const refresh = useCallback(() => {
+    loadWeather();
+  }, [loadWeather]);
 
-
-}
+  return {
+    weatherData,
+    loading,
+    error,
+    refresh,
+  };
+};
