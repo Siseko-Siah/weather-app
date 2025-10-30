@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { useWeather } from "../hooks/useWeather";
+import Loader from "../components/Loader";
+import ErrorMessage from "../components/ErrorMessage";
+import WeatherCard from "../components/WeatherCard";
 
 export default function App() {
   const { weatherData, loading, error, getWeather } = useWeather();
@@ -9,13 +12,12 @@ export default function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Weather Hook Test</h1>
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {weatherData && (
-        <pre>{JSON.stringify(weatherData, null, 2)}</pre>
-      )}
+    <div className="app">
+      <h1>Weather App</h1>
+
+      {loading && <Loader />}
+      {error && <ErrorMessage message={error} onRetry={getWeather} />}
+      {weatherData && <WeatherCard data={weatherData} onRefresh={getWeather} />}
     </div>
   );
 }
