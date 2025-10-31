@@ -9,10 +9,9 @@ const ERROR_MESSAGES = {
   WEATHER_FETCH_FAILED: 'Unable to fetch weather data. Please check your connection and try again.',
 };
 
-/**
- * Get user's current geolocation
- * @returns {Promise<{latitude: number, longitude: number}>}
- */
+
+ // Get user's current geolocation
+
 export const getCurrentLocation = () => {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
@@ -53,12 +52,9 @@ export const getCurrentLocation = () => {
   });
 };
 
-/**
- * Fetch current weather data from OpenWeatherMap API
- * @param {number} latitude
- * @param {number} longitude
- * @returns {Promise<Object>}
- */
+
+ // Fetch current weather data from OpenWeatherMap API
+
 export const fetchWeatherData = async (latitude, longitude) => {
   try {
     const response = await fetch(

@@ -8,7 +8,7 @@ export const WeatherPage = () => {
   const { weatherData, loading, error, refresh } = useWeather();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-300 py-8">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 px-4">
