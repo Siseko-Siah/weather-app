@@ -72,9 +72,9 @@ export const fetchWeatherData = async (latitude, longitude) => {
   }
 };
 
-/**
- * Transform API response to application format
- */
+
+ // Transform API response to application format
+ 
 const transformWeatherData = (data) => {
   return {
     location: {

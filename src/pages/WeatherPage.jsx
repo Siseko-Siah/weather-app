@@ -1,11 +1,11 @@
-import { useWeather } from '../hooks/useWeather';
+import { useWeatherData } from '../hooks/useWeatherData';
 import { Loader } from '../components/Loader';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { WeatherCard } from '../components/WeatherCard';
 import { RefreshCw } from 'lucide-react';
 
 export const WeatherPage = () => {
-  const { weatherData, loading, error, refresh } = useWeather();
+  const { weatherData, loading, error, refresh } = useWeatherData();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-300 py-8">
