@@ -1,9 +1,8 @@
-import { useState, useCallback } from 'react';
-import { getCurrentLocation } from '../api/weatherApi';
-
+import { useState, useCallback } from "react";
+import { getCurrentLocation } from "../api/weatherApi";
 
 // Custom hook to manage geolocation
- 
+
 export const useGeolocation = () => {
   const [coordinates, setCoordinates] = useState(null);
   const [loading, setLoading] = useState(false);

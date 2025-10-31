@@ -1,9 +1,8 @@
-import { useState, useCallback } from 'react';
-import { fetchWeatherData } from '../api/weatherApi';
-
+import { useState, useCallback } from "react";
+import { fetchWeatherData } from "../api/weatherApi";
 
 // custom hook to manage weather data fetching
- 
+
 export const useWeather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);

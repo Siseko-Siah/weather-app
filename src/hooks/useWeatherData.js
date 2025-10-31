@@ -1,7 +1,6 @@
-import { useEffect, useCallback, useState } from 'react';
-import { useGeolocation } from './useGeolocation';
-import { useWeather } from './useWeather';
-
+import { useEffect, useCallback, useState } from "react";
+import { useGeolocation } from "./useGeolocation";
+import { useWeather } from "./useWeather";
 
 // this hook handles getting the location and weather together
 

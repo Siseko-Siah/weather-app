@@ -1,15 +1,15 @@
-import { 
-  MapPin, 
-  Thermometer, 
-  Droplets, 
-  Wind, 
-  Gauge, 
-  Sun, 
-  Moon, 
-  Cloud, 
-  Navigation 
-} from 'lucide-react';
-import { getWeatherIconUrl } from '../api/weatherApi';
+import {
+  MapPin,
+  Thermometer,
+  Droplets,
+  Wind,
+  Gauge,
+  Sun,
+  Moon,
+  Cloud,
+  Navigation,
+} from "lucide-react";
+import { getWeatherIconUrl } from "../api/weatherApi";
 
 export const WeatherCard = ({ weatherData }) => {
   // Format time from timestamp
@@ -20,7 +20,7 @@ export const WeatherCard = ({ weatherData }) => {
 
   // Format coordinates
   const formatCoordinate = (value, isLat) => {
-    const direction = isLat ? (value >= 0 ? 'N' : 'S') : (value >= 0 ? 'E' : 'W');
+    const direction = isLat ? (value >= 0 ? "N" : "S") : value >= 0 ? "E" : "W";
     return `${Math.abs(value).toFixed(4)}° ${direction}`;
   };
 
@@ -45,7 +45,7 @@ export const WeatherCard = ({ weatherData }) => {
               className="w-16 h-16"
             />
           </div>
-          
+
           <div className="text-4xl">
             {weatherData.temperature.current}°C
             <span className="text-xl text-gray-600 ml-3">
@@ -65,7 +65,8 @@ export const WeatherCard = ({ weatherData }) => {
               <div>
                 <p className="text-sm text-gray-600">Min / Max</p>
                 <p className="text-gray-900">
-                  {weatherData.temperature.min}° / {weatherData.temperature.max}°
+                  {weatherData.temperature.min}° / {weatherData.temperature.max}
+                  °
                 </p>
               </div>
             </div>
@@ -141,22 +142,24 @@ export const WeatherCard = ({ weatherData }) => {
       <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
         <div className="p-6">
           <h3 className="mb-4">Additional Information</h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Coordinates */}
             <div>
               <p className="text-sm text-gray-600 mb-1">Coordinates</p>
               <p className="text-gray-900">
-                {formatCoordinate(weatherData.location.coordinates.lat, true)},{' '}
+                {formatCoordinate(weatherData.location.coordinates.lat, true)},{" "}
                 {formatCoordinate(weatherData.location.coordinates.lon, false)}
               </p>
             </div>
 
             {/* Wind Direction */}
             <div className="flex items-start gap-3">
-              <Navigation 
-                className="w-5 h-5 text-gray-600 mt-0.5" 
-                style={{ transform: `rotate(${weatherData.wind.direction}deg)` }}
+              <Navigation
+                className="w-5 h-5 text-gray-600 mt-0.5"
+                style={{
+                  transform: `rotate(${weatherData.wind.direction}deg)`,
+                }}
               />
               <div>
                 <p className="text-sm text-gray-600">Wind Direction</p>

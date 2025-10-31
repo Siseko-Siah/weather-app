@@ -1,21 +1,23 @@
 const WEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
-const WEATHER_API_BASE_URL = 'https://api.openweathermap.org/data/2.5';
+const WEATHER_API_BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 // Error messages
 const ERROR_MESSAGES = {
-  PERMISSION_DENIED: 'Location access denied. Please enable location permissions in your browser settings.',
-  POSITION_UNAVAILABLE: 'Unable to retrieve your location. Please check your device settings.',
-  TIMEOUT: 'Location request timed out. Please try again.',
-  WEATHER_FETCH_FAILED: 'Unable to fetch weather data. Please check your connection and try again.',
+  PERMISSION_DENIED:
+    "Location access denied. Please enable location permissions in your browser settings.",
+  POSITION_UNAVAILABLE:
+    "Unable to retrieve your location. Please check your device settings.",
+  TIMEOUT: "Location request timed out. Please try again.",
+  WEATHER_FETCH_FAILED:
+    "Unable to fetch weather data. Please check your connection and try again.",
 };
 
-
- // Get user's current geolocation
+// Get user's current geolocation
 
 export const getCurrentLocation = () => {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
-      reject(new Error('Geolocation is not supported by your browser'));
+      reject(new Error("Geolocation is not supported by your browser"));
       return;
     }
 
@@ -39,7 +41,7 @@ export const getCurrentLocation = () => {
             errorMessage = ERROR_MESSAGES.TIMEOUT;
             break;
           default:
-            errorMessage = 'An unknown error occurred';
+            errorMessage = "An unknown error occurred";
         }
         reject(new Error(errorMessage));
       },
@@ -52,8 +54,7 @@ export const getCurrentLocation = () => {
   });
 };
 
-
- // Fetch current weather data from OpenWeatherMap API
+// Fetch current weather data from OpenWeatherMap API
 
 export const fetchWeatherData = async (latitude, longitude) => {
   try {
@@ -72,9 +73,8 @@ export const fetchWeatherData = async (latitude, longitude) => {
   }
 };
 
+// Transform API response to application format
 
- // Transform API response to application format
- 
 const transformWeatherData = (data) => {
   return {
     location: {
